@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import styles from './App.module.css';
+import styles from './style/App.module.scss';
+import Navbar from './Navbar';
 
-function App() {
+import discordIcon from './assets/discord.svg';
+import githubIcon from './assets/github.svg';
+import mailIcon from './assets/mail.svg';
+
+const App = () => {
   return (
-    <div class={styles.App}>
-      <header class={styles.header}>
-        <img src={logo} class={styles.logo} alt="logo" />
-        <p>
-          Edit <code>src/App.jsx</code> and save to reload.
+    <div class={styles.container}>
+      <Navbar />
+      <main class={styles.main}>
+        <h1 class={styles.title}>Hi There!</h1>
+        <h2 class={styles.subtitle}>Welcome to <span class={styles.highlight}>Objectif.ai</span></h2>
+        <p class={styles.description}>
+          A growing platform showcasing<br />
+          Computer Vision applications
         </p>
-        <a
-          class={styles.link}
-          href="https://github.com/solidjs/solid"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn Solid
-        </a>
-      </header>
+        <p class={styles.check}>
+          Check out our work <a href="/Test" class={styles.highlight}>here</a>.
+        </p>
+        <div class={styles.contribute}>
+          <p>Want to contribute to this platform?<br />
+          Connect with us</p>
+          <div className={styles.socialIcons}>
+            <a href="/" aria-label="GitHub"><img src={githubIcon} alt="GitHub" /></a>
+            <a href="/" aria-label="Discord"><img src={discordIcon} alt="Discord" /></a>
+            <a href="/" aria-label="Email"><img src={mailIcon} alt="Email" /></a>
+          </div>
+        </div>
+      </main>
     </div>
   );
-}
+};
 
 export default App;
