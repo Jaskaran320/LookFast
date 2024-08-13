@@ -1,24 +1,27 @@
+@use 'App.module.scss';
+@import url('https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&family=Sora:wght@100..800&display=swap');
+
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  font-family: "Sora";
+  background-color: App.$background;
+  font-family: "Sora", sans-serif;
 }
 
 .logo {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   font-weight: bold;
-  color: #6b46c1;
+  color: App.$accent;
+  font-family: "Sora";
 
   a {
     text-decoration: none;
-    color: #6b46c1;
+    color: App.$accent;
 
     &:hover {
-      color: #392071;
+      color: App.$accent;
     }
   }
 }
@@ -26,11 +29,11 @@
 .navLinks {
   display: flex;
   list-style: none;
-  color: #6b46c1;
+  color: App.$accent;
   margin: 0;
   padding: 0;
   font-weight: 500;
-  font-size: 1.3rem;
+  font-size: 1rem;
 
   li {
     margin-left: 2rem;
@@ -38,12 +41,11 @@
 
     a {
       text-decoration: none;
-      color: #6b46c1;
+      color: App.$accent;
       transition: color 0.3s ease;//, transform 0.3s ease;
 
       &:hover {
-        // transform: scale(1.5);
-        color: #392071;
+        color: App.$accent;
       }
 
       &.active {

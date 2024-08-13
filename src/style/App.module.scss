@@ -1,3 +1,7 @@
+$primary: #DC5A31;
+$accent: #453B6F;
+$background: #FEFFFF;
+
 .container {
   width: 100%;
 }
@@ -10,65 +14,77 @@
 
 .title {
   font-size: 3rem;
-  font-weight: bold;
-  color: #7f59d5;
+  font-weight: 600;
+  color: $accent;
 }
 
 .subtitle {
   font-size: 2rem;
-  color: #4a4a4a;
+  color: $accent;
   margin-top: 1rem;
+  font-weight: 500;
+}
+
+.mid_link {
+  color: $primary;
 }
 
 .description {
   font-size: 1.5rem;
-  color: #4a4a4a;
+  color: $accent;
   margin-top: 2rem;
+  font-weight: 400;
 }
 
 .highlight {
-  color: #6b46c1;
+  color: $primary;
+  font-weight: 400;
   text-decoration: none;
 
-  .hover {
-    color: #392071;
+  &:hover {
+    color: $accent;
+    transition: all 0.2s;
   }
 }
 
 .check {
   margin-top: 20px;
   font-size: 1.5rem;
-  color: #4a4a4a;
+  color: $accent;
+  font-weight: 400;
 }
 
 .contribute {
-  margin-top: 150px;
-  font-size: 1.5rem;
-  color: #4a4a4a;
+  margin-top: 10rem;
+  font-size: 1.3rem;
+  font-weight: 300;
+
+  color: $accent;
 }
 
 .socialIcons {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
-  color: #6b46c1;
+  margin-top: 1rem;
   
   a {
     margin: 0 20px;
-    margin-top: -10px;
+    margin-top: 1rem;
     display: inline-block;
     width: 30px;
     height: 25px;
-    transition: transform 0.3s ease;
+    transition: transform 0.1s ease;
+    opacity: 80%;
 
     &:hover {
       transform: scale(1.1);
-      color: #392071;
+      opacity: 100%;
     }
 
     img {
       width: 150%;
       height: 150%;
+      transform: translate("-50%", "-50%");
     }
   }
 }

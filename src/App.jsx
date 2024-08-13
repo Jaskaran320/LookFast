@@ -11,7 +11,7 @@ const App = () => {
       <Navbar />
       <main class={styles.main}>
         <h1 class={styles.title}>Hi There!</h1>
-        <h2 class={styles.subtitle}>Welcome to <span class={styles.highlight}>Objectif.ai</span></h2>
+        <h2 class={styles.subtitle}>Welcome to <span class={styles.mid_link}>Drisht.ai</span></h2>
         <p class={styles.description}>
           A growing platform showcasing<br />
           Computer Vision applications
