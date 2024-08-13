@@ -1,0 +1,53 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: "Sora";
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #6b46c1;
+
+  a {
+    text-decoration: none;
+    color: #6b46c1;
+
+    &:hover {
+      color: #392071;
+    }
+  }
+}
+
+.navLinks {
+  display: flex;
+  list-style: none;
+  color: #6b46c1;
+  margin: 0;
+  padding: 0;
+  font-weight: 500;
+  font-size: 1.3rem;
+
+  li {
+    margin-left: 2rem;
+    margin-right: 2rem;
+
+    a {
+      text-decoration: none;
+      color: #6b46c1;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #392071;
+      }
+
+      &.active {
+        color: #3c2670;
+      }
+    }
+  }
+}
