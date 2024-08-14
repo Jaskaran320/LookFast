@@ -1,0 +1,104 @@
+// .testPage {
+//   background-color: #f7f5fa;
+//   border-radius: 1rem;
+// }
+
+.mainContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh;
+  padding: 2rem;
+}
+
+.uploadContainer {
+  background-color: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0rem 0rem 10rem 15rem rgba(123, 111, 215, 0.1);
+  padding: 2rem;
+  max-width: 600px;
+  width: 100%;
+}
+
+.uploadArea {
+  border: 2px dashed #d1d5db;
+  border-radius: 1rem;
+  padding: 3rem 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: #4e55af;
+  }
+}
+
+.uploadIcon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+
+  a {
+    margin: 0 1.5vw;
+    margin-top: 1vh;
+    display: inline-block;
+    width: 2vw;
+    height: 3.5vh;
+    transition: transform 0.2s ease;
+    opacity: 80%;
+
+    &:hover {
+      transform: scale(1.1);
+      opacity: 100%;
+    }
+
+    img {
+      width: 150%;
+      height: 150%;
+      transform: translate("-50%", "-50%");
+    }
+  }
+}
+
+.uploadText {
+  font-size: 1.3rem;
+  color: #4b5563;
+  margin-bottom: 0.5rem;
+}
+
+.browseText {
+  color: #4e55af;
+  cursor: pointer;
+}
+
+.supportedFormats {
+  font-size: 1rem;
+  color: #6b7280;
+}
+
+@media (max-width: 600px) {
+  .uploadContainer {
+    padding: 1rem;
+    margin-top: -25vh;
+  }
+
+  .uploadArea {
+    padding: 2rem 1rem;
+  }
+
+  .uploadText {
+    font-size: 1rem;
+  }
+
+  .supportedFormats {
+    font-size: 0.8rem;
+  }
+
+  .uploadIcon {
+    a {
+      width: 5vw;
+      height: 4vh;
+      margin-left: -0.5rem;
+    }
+  }
+}
