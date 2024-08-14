@@ -8,8 +8,8 @@ $background: #FEFFFF;
 
 .main {
   text-align: center;
-  padding: 20px;
-  margin-top: 20px;
+  padding: 2vh 2vw;
+  margin-top: 2vh;
 }
 
 .title {
@@ -21,7 +21,7 @@ $background: #FEFFFF;
 .subtitle {
   font-size: 2rem;
   color: $accent;
-  margin-top: 1rem;
+  margin-top: 1vh;
   font-weight: 500;
 }
 
@@ -32,7 +32,7 @@ $background: #FEFFFF;
 .description {
   font-size: 1.5rem;
   color: $accent;
-  margin-top: 2rem;
+  margin-top: 2vh;
   font-weight: 400;
 }
 
@@ -48,14 +48,14 @@ $background: #FEFFFF;
 }
 
 .check {
-  margin-top: 20px;
+  margin-top: 2vh;
   font-size: 1.5rem;
   color: $accent;
   font-weight: 400;
 }
 
 .contribute {
-  margin-top: 10rem;
+  margin-top: 22vh;
   font-size: 1.3rem;
   font-weight: 300;
 
@@ -65,15 +65,15 @@ $background: #FEFFFF;
 .socialIcons {
   display: flex;
   justify-content: center;
-  margin-top: 1rem;
+  margin-top: 1vh;
   
   a {
-    margin: 0 20px;
-    margin-top: 1rem;
+    margin: 0 1.5vw;
+    margin-top: 1vh;
     display: inline-block;
-    width: 30px;
-    height: 25px;
-    transition: transform 0.1s ease;
+    width: 2vw;
+    height: 3.5vh;
+    transition: transform 0.2s ease;
     opacity: 80%;
 
     &:hover {
@@ -85,6 +85,37 @@ $background: #FEFFFF;
       width: 150%;
       height: 150%;
       transform: translate("-50%", "-50%");
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .main {
+    padding: 1vh 4vw;
+    margin-top: 7vh;
+  }
+
+  .contribute {
+    margin-top: 5vh;
+  }
+
+  .socialIcons {
+    display: flex;
+    justify-content: center;
+    margin-top: 2vh;
+    
+    a {
+      margin: 0 4vw;
+      margin-top: 1vh;
+      display: inline-block;
+      width: 7vw;
+      height: 3vh;
+      opacity: 100%;
+  
+      img {
+        width: 150%;
+        height: 150%;
+      }
     }
   }
 }
