@@ -1,7 +1,7 @@
-import styles from "./style/App.module.scss";
-import discordIcon from "./assets/discord.svg";
-import githubIcon from "./assets/github.svg";
-import mailIcon from "./assets/mail.svg";
+import styles from "../stylesheets/App.module.scss";
+import discordIcon from "../assets/discord.svg";
+import githubIcon from "../assets/github.svg";
+import mailIcon from "../assets/mail.svg";
 
 const Intro = () => {
   return (
