@@ -4,7 +4,7 @@ import styles from "../stylesheets/App.module.scss";
 import Navbar from "./Navbar";
 import Home from "./Home";
 import Test from "./Test";
-import Display from "./Display";
+// import Display from "./Display";
 // import About from "./About";
 
 const App = () => {
@@ -15,7 +15,7 @@ const App = () => {
         <Router>
           <Route end component={Home} />
           <Route path="/Test" component={Test} />
-          <Route path="/Display" component={Display} />
+          {/* <Route path="/Display" component={Display} /> */}
           {/* <Route path="/About" component={About} /> */}
         </Router>
       </div>
