@@ -13,6 +13,7 @@ const Test = () => {
   const [image, setImage] = createSignal(null);
   const [coordinates, setCoordinates] = createSignal({ x: 0, y: 0 });
 
+
   onMount(() => {
     const storedImage = localStorage.getItem("uploadedImage");
     if (storedImage) {
@@ -48,15 +49,14 @@ const Test = () => {
           const base64data = reader.result;
           localStorage.setItem("uploadedImage", base64data);
           setImage(base64data);
-          console.log(
-            "File size before compression: ",
-            file.size / 1024 / 1024 + "MB"
-          );
-          console.log(
-            "File size after compression: ",
-            compressedFile.size / 1024 / 1024 + "MB"
-          );
-
+          // console.log(
+          //   "File size before compression: ",
+          //   file.size / 1024 / 1024 + "MB"
+          // );
+          // console.log(
+          //   "File size after compression: ",
+          //   compressedFile.size / 1024 / 1024 + "MB"
+          // );
           setTimeout(() => {
             setIsUploading(false);
           }, 1000);
@@ -68,6 +68,7 @@ const Test = () => {
       }
     }
   };
+
 
   const handleImageClick = (e) => {
     const rect = e.target.getBoundingClientRect();
@@ -99,6 +100,12 @@ const Test = () => {
               <div className={styles.displayPage}>
                 <div className={styles.mainContentDisplay}>
                   <div className={styles.imageWrapper}>
+                    <button
+                      className={styles.confirmButton}
+                      onClick={handleConfirm}
+                    >
+                      Confirm
+                    </button>
                     <div className={styles.imageContainer}>
                       <img
                         src={image()}
@@ -107,12 +114,6 @@ const Test = () => {
                         onClick={handleImageClick}
                       />
                     </div>
-                    <button
-                      className={styles.confirmButton}
-                      onClick={handleConfirm}
-                    >
-                      Confirm
-                    </button>
                     <button
                       className={styles.resetButton}
                       onClick={handleReset}
@@ -126,7 +127,7 @@ const Test = () => {
                   </div>
                 </div>
                 <div className={styles.instructions}>
-                  <p>Select point and press confirm</p>
+                  Select point and press confirm.
                 </div>
               </div>
             }

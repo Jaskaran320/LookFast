@@ -15,8 +15,6 @@ const App = () => {
         <Router>
           <Route end component={Home} />
           <Route path="/Test" component={Test} />
-          {/* <Route path="/Display" component={Display} /> */}
-          {/* <Route path="/About" component={About} /> */}
         </Router>
       </div>
     </div>

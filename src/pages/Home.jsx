@@ -8,7 +8,7 @@ const Intro = () => {
     <>
       <h1 className={styles.title}>Hi There!</h1>
       <h2 className={styles.subtitle}>
-        Welcome to <span className={styles.mid_link}>Drisht.ai</span>
+        Welcome to <span className={styles.mid_link}>LookFast</span>
       </h2>
       <p className={styles.description}>
         A growing platform showcasing

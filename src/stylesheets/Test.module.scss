@@ -1,3 +1,6 @@
+@use "App.module.scss";
+@import url('https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&family=Sora:wght@100..800&display=swap');
+
 .mainContent {
   display: flex;
   justify-content: center;
@@ -18,7 +21,7 @@
 .uploadArea {
   border: 2px dashed #d1d5db;
   border-radius: 1rem;
-  padding: 3rem 2rem;
+  padding:  2rem;
   text-align: center;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -100,7 +103,7 @@
 }
 
 .uploadingContainer {
-  background-color: #ffffff;
+  background-color: App.$background;
   border-radius: 1rem;
   box-shadow: 0rem 0rem 10rem 5rem rgba(123, 111, 215, 0.1);
   max-width: 20vw;
@@ -143,7 +146,6 @@
   margin-top: 0.5rem;
 }
 
-
 .displayPage {
   display: flex;
   flex-direction: column;
@@ -164,66 +166,59 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 120px;
+  gap: 1rem;
   position: relative;
 }
 
 .imageContainer {
   display: flex;
   justify-content: center;
-  background-color: #dddef4;
-  border: 2px dashed #4e55af;
+  border: 2px dashed App.$accent;
   border-radius: 10px;
-  padding: 1.5rem;
-  box-shadow: 0rem 0rem 10rem 5rem rgba(123, 111, 215, 0.2);
-  width: auto;
+  padding: 1rem;
 }
 
 .image {
   display: block;
   max-width: 100%;
+  border-radius: 10px;
   height: auto;
   cursor: pointer;
 }
 
 .confirmButton {
-  position: absolute;
-  right: -13vw;
-  top: 50%;
   transform: translateY(-50%);
-  padding: 10px 20px;
-  background-color: #dddef4;
-  color: #4e55af;
-  border: 2px solid #4e55af;
-  border-radius: 5px;
+  padding: 10px;
+  color: App.$accent;
+  border: 1px solid black;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 1rem;
+  background-color: transparent;
+  font-family: "Sora", sans-serif;
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #4e55af;
-    color: white;
+    background-color: App.$button;
+    color: black;
   }
 }
 
 .resetButton {
-  position: absolute;
-  right: -13vw;
-  top: 50%;
   transform: translateY(-50%);
-  margin-top: 5rem;
-  padding: 10px 20px;
-  background-color: #dddef4;
-  color: #4e55af;
-  border: 2px solid #4e55af;
-  border-radius: 5px;
+  padding: 10px;
+  color: App.$accent;
+  border: 1px solid black;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 1rem;
+  background-color: transparent;
+  font-family: "Sora", sans-serif;
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #4e55af;
-    color: white;
+    background-color: App.$button;
+    color: black;
   }
 }
 
@@ -231,7 +226,7 @@
   background-color: white;
   margin-top: 20px;
   padding: 15px;
-  border: 2px solid #4e55af;
+  border: 2px solid App.$accent;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -245,12 +240,12 @@
 }
 
 .instructions {
-  margin-top: 25px;
-  font-size: 18px;
-  color: #4e55af;
-  background-color: #dddef4;
+  margin-top: 1.5rem;
+  font-size: 12px;
+  font-family: 'Sora', sans-serif;
+  color: App.$accent;
+  background-color: #4e54af33;
   text-align: center;
-  padding: 0px 15px;
-  border-radius: 20px;
+  padding: 0.5rem;
+  border-radius: 10px;
 }
-
