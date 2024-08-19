@@ -1,4 +1,5 @@
 import { createSignal, Show, onMount } from "solid-js";
+import axios from "axios";
 import imageCompression from "browser-image-compression";
 import { createEffect } from "solid-js";
 
@@ -13,13 +14,12 @@ const Test = () => {
   createEffect(() => {
     ["dragenter", "dragover", "dragleave", "drop"].forEach((eventName) => {
       document
-      .querySelector(".test-window")
-      .addEventListener(eventName, (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-      });
-    }
-    );
+        .querySelector(".test-window")
+        .addEventListener(eventName, (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+        });
+    });
   });
 
   localStorage.clear();
@@ -49,7 +49,6 @@ const Test = () => {
   };
 
   const handleFileChange = async (e) => {
-    
     const file = e.target.files[0];
     if (file) {
       if (file.size > MAX_FILE_SIZE) {
@@ -93,7 +92,23 @@ const Test = () => {
     setCoordinates({ x: Math.round(x), y: Math.round(y) });
   };
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
+    if (!coordinates().x || !coordinates().y) {
+      alert("Please select a point on the image.");
+      return;
+    }
+
+    try {
+      const response = await axios.post("http://localhost:5000/process_image", {
+        image: image(),
+        coordinates: coordinates(),
+      });
+      console.log("Response from server: ", response.data);
+    } catch (error) {
+      console.error("Error sending data to server:", error);
+      alert("An error occurred while processing the image");
+    }
+
     setCoordinates({ x: 0, y: 0 });
   };
 

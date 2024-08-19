@@ -36,13 +36,13 @@ const Contribute = () => {
       </p>
       <div className={styles.socialIcons}>
         <a href="/">
-          <img src={githubIcon} alt="GitHub" />
+          <img src={githubIcon} alt="GitHubIcon" />
         </a>
         <a href="/">
-          <img src={discordIcon} alt="Discord" />
+          <img src={discordIcon} alt="DiscordIcon" />
         </a>
         <a href="/">
-          <img src={mailIcon} alt="Email" />
+          <img src={mailIcon} alt="EmailIcon" />
         </a>
       </div>
     </div>

@@ -18,7 +18,7 @@ const UploadContainer = ({
       />
       <div className={styles.uploadIcon}>
         <a href="/Test">
-          <img src={uploadIcon} alt="Upload" />
+          <img src={uploadIcon} alt="UploadIcon" />
         </a>
       </div>
       <p className={styles.uploadText}>
