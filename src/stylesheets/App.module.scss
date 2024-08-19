@@ -1,9 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&family=Sora:wght@100..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&family=Sora:wght@100..800&display=swap");
 
-$primary: #DC5A31;
-$accent: #453B6F;
-$background: #FEFFFF;
+$primary: #dc5a31;
+$accent: #453b6f;
+$background: #feffff;
 $button: #21068f14;
+$upload: #4e55af;
+
 .container {
   width: 100%;
 }
@@ -68,7 +70,7 @@ $button: #21068f14;
   display: flex;
   justify-content: center;
   margin-top: 1vh;
-  
+
   a {
     margin: 0 1.5vw;
     margin-top: 1vh;
@@ -105,7 +107,7 @@ $button: #21068f14;
     display: flex;
     justify-content: center;
     margin-top: 2vh;
-    
+
     a {
       margin: 0 4vw;
       margin-top: 1vh;
@@ -113,7 +115,7 @@ $button: #21068f14;
       width: 7vw;
       height: 3vh;
       opacity: 100%;
-  
+
       img {
         width: 150%;
         height: 150%;

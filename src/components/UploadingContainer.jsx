@@ -1,0 +1,10 @@
+import styles from "../stylesheets/Test.module.scss";
+
+const UploadingContainer = () => (
+  <div className={styles.uploadingContainer}>
+    <p className={styles.uploadingText}>Uploading...</p>
+    <div className={styles.loader}></div>
+  </div>
+);
+
+export default UploadingContainer;

@@ -1,7 +1,7 @@
 import { Router, Route } from "@solidjs/router";
 
 import styles from "../stylesheets/App.module.scss";
-import Navbar from "./Navbar";
+import Navbar from "../components/Navbar";
 import Home from "./Home";
 import Test from "./Test";
 // import Display from "./Display";

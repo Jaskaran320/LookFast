@@ -1,7 +1,10 @@
 import { createSignal, Show, onMount } from "solid-js";
 import imageCompression from "browser-image-compression";
+
+import UploadContainer from "../components/UploadContainer";
+import UploadingContainer from "../components/UploadingContainer";
+import Display from "../components/Display";
 import styles from "../stylesheets/Test.module.scss";
-import uploadIcon from "../assets/upload.svg";
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
@@ -12,7 +15,6 @@ const Test = () => {
   const [errorMessage, setErrorMessage] = createSignal("");
   const [image, setImage] = createSignal(null);
   const [coordinates, setCoordinates] = createSignal({ x: 0, y: 0 });
-
 
   onMount(() => {
     const storedImage = localStorage.getItem("uploadedImage");
@@ -69,7 +71,6 @@ const Test = () => {
     }
   };
 
-
   const handleImageClick = (e) => {
     const rect = e.target.getBoundingClientRect();
     const x = e.clientX - rect.left;
@@ -97,74 +98,24 @@ const Test = () => {
           <Show
             when={isUploading()}
             fallback={
-              <div className={styles.displayPage}>
-                <div className={styles.mainContentDisplay}>
-                  <div className={styles.imageWrapper}>
-                    <button
-                      className={styles.confirmButton}
-                      onClick={handleConfirm}
-                    >
-                      Confirm
-                    </button>
-                    <div className={styles.imageContainer}>
-                      <img
-                        src={image()}
-                        alt="Uploaded"
-                        className={styles.image}
-                        onClick={handleImageClick}
-                      />
-                    </div>
-                    <button
-                      className={styles.resetButton}
-                      onClick={handleReset}
-                    >
-                      Reset
-                    </button>
-                  </div>
-                  <div className={styles.coordinates}>
-                    <span>X: {coordinates().x}</span>
-                    <span>Y: {coordinates().y}</span>
-                  </div>
-                </div>
-                <div className={styles.instructions}>
-                  Select point and press confirm.
-                </div>
-              </div>
+              <Display
+                image={image}
+                handleConfirm={handleConfirm}
+                handleImageClick={handleImageClick}
+                handleReset={handleReset}
+                coordinates={coordinates}
+              />
             }
           >
-            <div className={styles.uploadingContainer}>
-              <p class={styles.uploadText}>Uploading...</p>
-              <div className={styles.loader}></div>
-            </div>
+            <UploadingContainer />
           </Show>
         }
       >
-        <div className={styles.uploadContainer}>
-          <div className={styles.uploadArea} onClick={handleFileUpload}>
-            <input
-              id="fileUpload"
-              type="file"
-              accept=".jpg,.jpeg,.png"
-              style={{ display: "none" }}
-              onChange={(e) => handleFileChange(e)}
-            />
-            <div className={styles.uploadIcon}>
-              <a href="/Test">
-                <img src={uploadIcon} alt="Upload" />
-              </a>
-            </div>
-            <p className={styles.uploadText}>
-              Drop your image here, or{" "}
-              <span className={styles.browseText}>browse</span>
-            </p>
-            <p className={styles.supportedFormats}>
-              Supports JPG, JPEG and PNG files
-            </p>
-            {errorMessage() && (
-              <p className={styles.errorText}>{errorMessage()}</p>
-            )}
-          </div>
-        </div>
+        <UploadContainer
+          handleFileUpload={handleFileUpload}
+          handleFileChange={handleFileChange}
+          errorMessage={errorMessage}
+        />
       </Show>
     </div>
   );
