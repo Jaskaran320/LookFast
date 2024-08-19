@@ -1,5 +1,6 @@
 import { createSignal, Show, onMount } from "solid-js";
 import imageCompression from "browser-image-compression";
+import { createEffect } from "solid-js";
 
 import UploadContainer from "../components/UploadContainer";
 import UploadingContainer from "../components/UploadingContainer";
@@ -9,6 +10,18 @@ import styles from "../stylesheets/Test.module.scss";
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
 const Test = () => {
+  createEffect(() => {
+    ["dragenter", "dragover", "dragleave", "drop"].forEach((eventName) => {
+      document
+      .querySelector(".test-window")
+      .addEventListener(eventName, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+      });
+    }
+    );
+  });
+
   localStorage.clear();
 
   const [isUploading, setIsUploading] = createSignal(false);
@@ -27,7 +40,16 @@ const Test = () => {
     document.getElementById("fileUpload").click();
   };
 
+  const handleDrop = (e) => {
+    let dataTransfer = e.dataTransfer;
+    let image = dataTransfer.files;
+    document.getElementById("fileUpload").files = image;
+    console.log(document.getElementById("fileUpload").files);
+    document.getElementById("fileUpload").dispatchEvent(new Event("change"));
+  };
+
   const handleFileChange = async (e) => {
+    
     const file = e.target.files[0];
     if (file) {
       if (file.size > MAX_FILE_SIZE) {
@@ -51,14 +73,6 @@ const Test = () => {
           const base64data = reader.result;
           localStorage.setItem("uploadedImage", base64data);
           setImage(base64data);
-          // console.log(
-          //   "File size before compression: ",
-          //   file.size / 1024 / 1024 + "MB"
-          // );
-          // console.log(
-          //   "File size after compression: ",
-          //   compressedFile.size / 1024 / 1024 + "MB"
-          // );
           setTimeout(() => {
             setIsUploading(false);
           }, 1000);
@@ -81,7 +95,6 @@ const Test = () => {
 
   const handleConfirm = () => {
     setCoordinates({ x: 0, y: 0 });
-    console.log("Coordinates confirmed:", coordinates());
   };
 
   const handleReset = () => {
@@ -91,7 +104,7 @@ const Test = () => {
   };
 
   return (
-    <div className={styles.mainContent}>
+    <div className={`${styles.mainContent} test-window`}>
       <Show
         when={!isUploading() && !image()}
         fallback={
@@ -114,6 +127,7 @@ const Test = () => {
         <UploadContainer
           handleFileUpload={handleFileUpload}
           handleFileChange={handleFileChange}
+          handleDrop={handleDrop}
           errorMessage={errorMessage}
         />
       </Show>

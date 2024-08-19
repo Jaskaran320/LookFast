@@ -1,4 +1,5 @@
 import styles from "../stylesheets/Test.module.scss";
+import { IoInformationCircleSharp } from 'solid-icons/io'
 
 const Display = ({
   image,
@@ -30,7 +31,7 @@ const Display = ({
         <span>Y: {coordinates().y}</span>
       </div>
     </div>
-    <div className={styles.instructions}>Select point and press confirm.</div>
+    <div className={styles.instructions}> <IoInformationCircleSharp size = {24}/> Select point and press confirm.</div>
   </div>
 );
 

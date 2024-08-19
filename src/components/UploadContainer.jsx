@@ -3,17 +3,18 @@ import uploadIcon from "../assets/upload.svg";
 
 const UploadContainer = ({
   handleFileUpload,
+  handleDrop,
   handleFileChange,
   errorMessage,
 }) => (
-  <div className={styles.uploadContainer}>
+  <div className={styles.uploadContainer} ondrop={handleDrop}>
     <div className={styles.uploadArea} onClick={handleFileUpload}>
       <input
         id="fileUpload"
         type="file"
         accept=".jpg,.jpeg,.png"
         style={{ display: "none" }}
-        onChange={(e) => handleFileChange(e)}
+        onchange={(e) => handleFileChange(e)}
       />
       <div className={styles.uploadIcon}>
         <a href="/Test">
@@ -25,7 +26,7 @@ const UploadContainer = ({
         <span className={styles.browseText}>browse</span>
       </p>
       <p className={styles.supportedFormats}>
-        Supports JPG, JPEG and PNG files
+        Supports JPG, JPEG and PNG files.
       </p>
       {errorMessage() && <p className={styles.errorText}>{errorMessage()}</p>}
     </div>

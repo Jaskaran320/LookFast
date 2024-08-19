@@ -190,8 +190,8 @@
   transform: translateY(-50%);
   padding: 10px;
   color: App.$accent;
-  border: 1px solid black;
-  border-radius: 8px;
+  border: 2px solid App.$accent;
+  border-radius: 15px;
   cursor: pointer;
   font-size: 1rem;
   background-color: transparent;
@@ -208,8 +208,8 @@
   transform: translateY(-50%);
   padding: 10px;
   color: App.$accent;
-  border: 1px solid black;
-  border-radius: 8px;
+  border: 2px solid App.$accent;
+  border-radius: 15px;
   cursor: pointer;
   font-size: 1rem;
   background-color: transparent;
@@ -240,8 +240,12 @@
 }
 
 .instructions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 1.5rem;
   font-size: 12px;
+  gap: 0.5rem;
   font-family: "Sora", sans-serif;
   color: App.$accent;
   background-color: #4e54af33;
