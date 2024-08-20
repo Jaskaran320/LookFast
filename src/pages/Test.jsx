@@ -5,7 +5,7 @@ import { createEffect } from "solid-js";
 
 import UploadContainer from "../components/UploadContainer";
 import UploadingContainer from "../components/UploadingContainer";
-import Display from "../components/Display";
+import DisplayImage from "../components/DisplayImage";
 import styles from "../stylesheets/Test.module.scss";
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
@@ -99,14 +99,17 @@ const Test = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:5000/process_image", {
+      const response = await axios.post("https://7b6f-34-82-133-110.ngrok-free.app/process_image", {
         image: image(),
         coordinates: coordinates(),
       });
-      console.log("Response from server: ", response.data);
+      console.log("Response from server: ", response.data.message);
+
+      setImage(response.data.masked_image);
     } catch (error) {
       console.error("Error sending data to server:", error);
       alert("An error occurred while processing the image");
+      console.log("Coordinates: ", coordinates());
     }
 
     setCoordinates({ x: 0, y: 0 });
@@ -126,7 +129,7 @@ const Test = () => {
           <Show
             when={isUploading()}
             fallback={
-              <Display
+              <DisplayImage
                 image={image}
                 handleConfirm={handleConfirm}
                 handleImageClick={handleImageClick}

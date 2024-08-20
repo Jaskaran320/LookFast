@@ -3,6 +3,7 @@ from flask_cors import CORS
 import base64
 from io import BytesIO
 from PIL import Image
+from model import process_image_from_model
 
 app = Flask(__name__)
 CORS(app)
@@ -22,10 +23,16 @@ def process_image():
         image_bytes = base64.b64decode(image_data)
         image = Image.open(BytesIO(image_bytes))
 
-        # TODO: Integrate SAM2 model here
+        masked_image = process_image_from_model(image, coordinates)
+
+        buffered = BytesIO()
+        masked_image_pil = Image.fromarray(masked_image)
+        masked_image_pil.save(buffered, format="PNG")
+        masked_image_base64 = base64.b64encode(buffered.getvalue()).decode("utf-8")
 
         result = {
             "message": "Image received and coordinates processed",
+            "masked_image": "data:image/png;base64," + masked_image_base64
         }
         return jsonify(result), 200
 

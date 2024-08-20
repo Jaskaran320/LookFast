@@ -1,7 +1,7 @@
 import styles from "../stylesheets/Test.module.scss";
 import { IoInformationCircleSharp } from "solid-icons/io";
 
-const Display = ({
+const DisplayImage = ({
   image,
   handleConfirm,
   handleImageClick,
@@ -38,4 +38,4 @@ const Display = ({
   </div>
 );
 
-export default Display;
+export default DisplayImage;
