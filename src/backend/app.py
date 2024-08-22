@@ -23,7 +23,14 @@ def process_image():
         image_bytes = base64.b64decode(image_data)
         image = Image.open(BytesIO(image_bytes))
 
-        masked_image = process_image_from_model(image, coordinates)
+        try:
+            masked_image = process_image_from_model(image, coordinates)
+        except ValueError as e:
+            return jsonify({"error": str(e)}), 400
+        except RuntimeError as e:
+            return jsonify({"error": str(e)}), 500
+        except Exception as e:
+            return jsonify({"error": "An unexpected error occurred during image processing"}), 500
 
         buffered = BytesIO()
         masked_image_pil = Image.fromarray(masked_image)

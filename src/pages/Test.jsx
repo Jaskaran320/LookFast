@@ -7,6 +7,7 @@ import UploadContainer from "../components/UploadContainer";
 import UploadingContainer from "../components/UploadingContainer";
 import DisplayImage from "../components/DisplayImage";
 import styles from "../stylesheets/Test.module.scss";
+import LoadingOverlay from "../components/LoadingOverlay";
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
@@ -27,6 +28,7 @@ const Test = () => {
   const [isUploading, setIsUploading] = createSignal(false);
   const [errorMessage, setErrorMessage] = createSignal("");
   const [image, setImage] = createSignal(null);
+  const [loading, setLoading] = createSignal(false);
   const [coordinates, setCoordinates] = createSignal({ x: 0, y: 0 });
 
   onMount(() => {
@@ -98,18 +100,23 @@ const Test = () => {
       return;
     }
 
+    setLoading(true);
     try {
-      const response = await axios.post("https://7b6f-34-82-133-110.ngrok-free.app/process_image", {
-        image: image(),
-        coordinates: coordinates(),
-      });
+      const response = await axios.post(
+        "https://c3e5-34-87-58-83.ngrok-free.app/process_image",
+        {
+          image: image(),
+          coordinates: coordinates(),
+        }
+      );
       console.log("Response from server: ", response.data.message);
 
       setImage(response.data.masked_image);
     } catch (error) {
       console.error("Error sending data to server:", error);
       alert("An error occurred while processing the image");
-      console.log("Coordinates: ", coordinates());
+    } finally {
+      setLoading(false);
     }
 
     setCoordinates({ x: 0, y: 0 });
@@ -123,6 +130,9 @@ const Test = () => {
 
   return (
     <div className={`${styles.mainContent} test-window`}>
+      <Show when={loading()}>
+        <LoadingOverlay />
+      </Show>
       <Show
         when={!isUploading() && !image()}
         fallback={

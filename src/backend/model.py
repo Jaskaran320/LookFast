@@ -8,39 +8,54 @@ from sam2.sam2_image_predictor import SAM2ImagePredictor
 
 
 def process_image_from_model(image, coordinates):
-    input_point = np.array([[coordinates["x"], coordinates["y"]]])
-    input_label = np.array([1])
-    image_np = np.array(image.convert("RGB"), dtype=np.float16)
+    try: 
+        input_point = np.array([[coordinates["x"], coordinates["y"]]])
+        input_label = np.array([1])
+        image_np = np.array(image.convert("RGB"), dtype=np.uint8)
 
-    checkpoint = "sam2_hiera_small.pt"
-    model_cfg = "sam2_hiera_s.yaml"
-    predictor = SAM2ImagePredictor(build_sam2(model_cfg, checkpoint))
-    predictor.set_image(image_np)
+        checkpoint = "sam2_hiera_small.pt"
+        model_cfg = "sam2_hiera_s.yaml"
+        predictor = SAM2ImagePredictor(build_sam2(model_cfg, checkpoint))
+        predictor.set_image(image_np)
 
-    masks, scores, logits = predictor.predict(
-        point_coords=input_point,
-        point_labels=input_label,
-        # multimask_output=True,
-    )
+        masks, scores, logits = predictor.predict(
+            point_coords=input_point,
+            point_labels=input_label,
+            multimask_output=True,
+        )
 
-    sorted_ind = np.argsort(scores)[::-1]
-    masks = masks[sorted_ind]
-    scores = scores[sorted_ind]
-    logits = logits[sorted_ind]
+        sorted_ind = np.argsort(scores)[::-1]
+        masks = masks[sorted_ind]
+        scores = scores[sorted_ind]
+        logits = logits[sorted_ind]
 
-    # masked_image = show_masks(image_np, masks[0], scores[0], point_coords=input_point, input_labels=input_label, borders=True)
-    masked_image = draw_mask_on_image(image, masks[0])
+        # masked_image = show_masks(image_np, masks[0], scores[0], point_coords=input_point, input_labels=input_label, borders=True)
+        masked_image = draw_mask_on_image(image_np, masks[0])
 
-    return masked_image
+        return masked_image
+    
+    except ValueError as e:
+        raise ValueError(f"Error processing image: {str(e)}")
+    except RuntimeError as e:
+        raise RuntimeError(f"Error running the SAM2 model: {str(e)}")
+    except Exception as e:
+        raise Exception(f"Unexpected error occurred during image processing: {str(e)}")
 
 
 def draw_mask_on_image(image, mask, color=(30, 144, 255, 128)):
-    image = cv2.cvtColor(image, cv2.COLOR_RGB2RGBA)
-    mask_image = np.zeros_like(image, dtype=np.uint8)
-    mask_image[:, :, :3] = color[:3]
-    mask_image[:, :, 3] = (mask * color[3]).astype(np.uint8)
-    masked_image = cv2.addWeighted(image, 1.0, mask_image, 0.5, 0)
-    return masked_image
+    try:
+        image = cv2.cvtColor(image.astype(np.uint8), cv2.COLOR_RGB2RGBA)
+        mask_image = np.zeros_like(image, dtype=np.uint8)
+        mask_image[:, :, :3] = color[:3]
+        mask_image[:, :, 3] = (mask * color[3]).astype(np.uint8)
+        masked_image = cv2.addWeighted(image.astype(np.uint8), 1.0, mask_image.astype(np.uint8), 0.5, 0)
+
+        return masked_image
+    
+    except cv2.error as e:
+        raise ValueError(f"Error drawing the mask on the image: {str(e)}")
+    except Exception as e:
+        raise Exception(f"Unexpected error occurred during mask drawing: {str(e)}")
 
 
 def show_mask(mask, ax, random_color=False, borders=True):

@@ -253,3 +253,27 @@
   padding: 0.5rem;
   border-radius: 10px;
 }
+
+.loadingOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.loadingIconWrapper {
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+.loadingIcon {
+  color: App.$accent;
+  animation: spin 1s linear infinite;
+}
