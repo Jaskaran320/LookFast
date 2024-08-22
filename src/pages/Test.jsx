@@ -28,15 +28,9 @@ const Test = () => {
   const [isUploading, setIsUploading] = createSignal(false);
   const [errorMessage, setErrorMessage] = createSignal("");
   const [image, setImage] = createSignal(null);
+  const [originalImage, setOriginalImage] = createSignal(null);
   const [loading, setLoading] = createSignal(false);
   const [coordinates, setCoordinates] = createSignal({ x: 0, y: 0 });
-
-  onMount(() => {
-    const storedImage = localStorage.getItem("uploadedImage");
-    if (storedImage) {
-      setImage(storedImage);
-    }
-  });
 
   const handleFileUpload = () => {
     document.getElementById("fileUpload").click();
@@ -74,6 +68,7 @@ const Test = () => {
           const base64data = reader.result;
           localStorage.setItem("uploadedImage", base64data);
           setImage(base64data);
+          setOriginalImage(base64data);
           setTimeout(() => {
             setIsUploading(false);
           }, 1000);
@@ -105,7 +100,7 @@ const Test = () => {
       const response = await axios.post(
         "https://5f15-35-197-88-4.ngrok-free.app/process_image",
         {
-          image: image(),
+          image: originalImage(),
           coordinates: coordinates(),
         }
       );
@@ -123,10 +118,15 @@ const Test = () => {
   };
 
   const handleReset = () => {
+    setImage(originalImage());
+    setCoordinates({ x: 0, y: 0 });
+  };
+
+  const handleResetImage = () => {
     localStorage.removeItem("uploadedImage");
     setImage(null);
     setCoordinates({ x: 0, y: 0 });
-  };
+  }
 
   return (
     <div className={`${styles.mainContent} test-window`}>
@@ -144,6 +144,7 @@ const Test = () => {
                 handleConfirm={handleConfirm}
                 handleImageClick={handleImageClick}
                 handleReset={handleReset}
+                handleResetImage={handleResetImage}
                 coordinates={coordinates}
               />
             }

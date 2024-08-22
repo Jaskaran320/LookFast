@@ -6,14 +6,15 @@ const DisplayImage = ({
   handleConfirm,
   handleImageClick,
   handleReset,
+  handleResetImage,
   coordinates,
 }) => (
   <div className={styles.displayPage}>
     <div className={styles.mainContentDisplay}>
       <div className={styles.imageWrapper}>
-        <button className={styles.resetButton} onClick={handleReset}>
-          Reset
-        </button>
+          <button className={styles.resetImageButton} onClick={handleResetImage}>
+            Reset Image
+          </button>
         <div className={styles.imageContainer}>
           <img
             src={image()}
@@ -22,9 +23,14 @@ const DisplayImage = ({
             onClick={handleImageClick}
           />
         </div>
-        <button className={styles.confirmButton} onClick={handleConfirm}>
-          Confirm
-        </button>
+        <div className={styles.buttonContainer}>
+          <button className={styles.confirmButton} onClick={handleConfirm}>
+            Confirm
+          </button>
+          <button className={styles.resetButton} onClick={handleReset}>
+            Reset
+          </button>
+          </div>
       </div>
       <div className={styles.coordinates}>
         <span>X: {coordinates().x}</span>
