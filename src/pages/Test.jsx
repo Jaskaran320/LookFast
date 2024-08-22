@@ -103,7 +103,7 @@ const Test = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "https://c3e5-34-87-58-83.ngrok-free.app/process_image",
+        "https://5f15-35-197-88-4.ngrok-free.app/process_image",
         {
           image: image(),
           coordinates: coordinates(),
