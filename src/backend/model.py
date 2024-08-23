@@ -1,6 +1,7 @@
-import numpy as np
 import cv2
+import numpy as np
 from sam2.build_sam import build_sam2
+from sam2.utils.misc import variant_to_config_mapping
 from sam2.sam2_image_predictor import SAM2ImagePredictor
 
 
@@ -8,17 +9,21 @@ def process_image_from_model(image, coordinates):
     try:
         input_point = np.array([[coordinates["x"], coordinates["y"]]])
         input_label = np.array([1])
-        image_np = np.array(image.convert("RGB"), dtype=np.uint8)
+        image_np = np.array(image.convert("RGB"), np.uint8)
 
-        checkpoint = "sam2_hiera_small.pt"
-        model_cfg = "sam2_hiera_s.yaml"
-        predictor = SAM2ImagePredictor(build_sam2(model_cfg, checkpoint))
+        model = build_sam2(
+            variant_to_config_mapping["tiny"],
+            "/content/sam2_hiera_tiny.pt",
+        )
+
+        predictor = SAM2ImagePredictor(model)
         predictor.set_image(image_np)
 
         masks, scores, logits = predictor.predict(
             point_coords=input_point,
             point_labels=input_label,
             multimask_output=True,
+            box=None,
         )
 
         sorted_ind = np.argsort(scores)[::-1]
@@ -26,9 +31,7 @@ def process_image_from_model(image, coordinates):
         scores = scores[sorted_ind]
         logits = logits[sorted_ind]
 
-        # masked_image = show_masks(image_np, masks[0], scores[0], point_coords=input_point, input_labels=input_label, borders=True)
         masked_image = draw_mask_on_image(image_np, masks[0])
-
         return masked_image
 
     except ValueError as e:

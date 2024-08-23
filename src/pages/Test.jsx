@@ -98,13 +98,12 @@ const Test = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "https://5f15-35-197-88-4.ngrok-free.app/process_image",
+        "https://7108-35-196-33-42.ngrok-free.app/process_image",
         {
           image: originalImage(),
           coordinates: coordinates(),
         }
       );
-      console.log("Response from server: ", response.data.message);
 
       setImage(response.data.masked_image);
     } catch (error) {

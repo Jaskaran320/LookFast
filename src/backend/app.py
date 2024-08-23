@@ -1,8 +1,8 @@
-from flask import Flask, request, jsonify
-from flask_cors import CORS
 import base64
-from io import BytesIO
 from PIL import Image
+from io import BytesIO
+from flask_cors import CORS
+from flask import Flask, request, jsonify
 from model import process_image_from_model
 
 app = Flask(__name__)
@@ -30,7 +30,12 @@ def process_image():
         except RuntimeError as e:
             return jsonify({"error": str(e)}), 500
         except Exception as e:
-            return jsonify({"error": "An unexpected error occurred during image processing"}), 500
+            return (
+                jsonify(
+                    {"error": "An unexpected error occurred during image processing"}
+                ),
+                500,
+            )
 
         buffered = BytesIO()
         masked_image_pil = Image.fromarray(masked_image)
@@ -39,7 +44,7 @@ def process_image():
 
         result = {
             "message": "Image received and coordinates processed",
-            "masked_image": "data:image/png;base64," + masked_image_base64
+            "masked_image": "data:image/png;base64," + masked_image_base64,
         }
         return jsonify(result), 200
 
