@@ -1,4 +1,4 @@
-import styles from "../stylesheets/Test.module.scss";
+import styles from "../stylesheets/Segment.module.scss";
 
 const UploadingContainer = () => (
   <div className={styles.uploadingContainer}>

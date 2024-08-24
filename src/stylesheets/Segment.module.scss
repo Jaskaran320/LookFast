@@ -148,14 +148,19 @@
 
 .displayPage {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #ffffff;
+  background-color: white;
+}
+
+.contentWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .mainContentDisplay {
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -166,13 +171,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
-  position: relative;
 }
 
 .imageContainer {
-  display: flex;
-  justify-content: center;
   border: 2px dashed App.$accent;
   border-radius: 10px;
   padding: 1rem;
@@ -186,15 +187,19 @@
   cursor: pointer;
 }
 
-.buttonContainer {
+.leftButton,
+.rightButtons {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin: 0 1.5rem;
+  margin-top: -10rem;
 }
 
-.confirmButton {
-  transform: translateY(-50%);
+.confirmButton,
+.resetButton,
+.resetImageButton {
   padding: 0.625rem;
   color: App.$accent;
   border: 2px solid App.$accent;
@@ -204,36 +209,36 @@
   background-color: transparent;
   font-family: "Sora", sans-serif;
   transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: App.$button;
-    color: black;
-  }
+  white-space: nowrap;
 }
 
-.resetButton {
-  @extend .confirmButton;
+.confirmButton:hover,
+.resetButton:hover,
+.resetImageButton:hover {
+  background-color: App.$button;
 }
 
-.resetImageButton {
-  @extend .confirmButton;
+.rightButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .coordinates {
   background-color: white;
-  margin-top: 20px;
+  margin-top: 1.5rem;
   padding: 15px;
   border: 2px solid App.$accent;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   display: flex;
-  gap: 20px;
+  gap: 1.5rem;
   font-size: 18px;
   color: App.$upload;
+}
 
-  span {
-    font-weight: bold;
-  }
+.coordinates span {
+  font-weight: bold;
 }
 
 .instructions {

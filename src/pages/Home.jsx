@@ -35,13 +35,13 @@ const Contribute = () => {
         Connect with us
       </p>
       <div className={styles.socialIcons}>
-        <a href="/">
+        <a href="https://github.com/Jaskaran320/LookFast" target="_blank">
           <img src={githubIcon} alt="GitHubIcon" />
         </a>
-        <a href="/">
+        <a href="https://discord.gg/xnUcSmBQ" target="_blank">
           <img src={discordIcon} alt="DiscordIcon" />
         </a>
-        <a href="/">
+        <a href="mailto:jaskaransingh.official7@gmail.com" target="_blank">
           <img src={mailIcon} alt="EmailIcon" />
         </a>
       </div>

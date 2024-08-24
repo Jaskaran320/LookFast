@@ -1,17 +1,17 @@
-import { createSignal, Show, onMount } from "solid-js";
 import axios from "axios";
-import imageCompression from "browser-image-compression";
 import { createEffect } from "solid-js";
+import { createSignal, Show } from "solid-js";
+import imageCompression from "browser-image-compression";
 
 import UploadContainer from "../components/UploadContainer";
 import UploadingContainer from "../components/UploadingContainer";
 import DisplayImage from "../components/DisplayImage";
-import styles from "../stylesheets/Test.module.scss";
+import styles from "../stylesheets/Segment.module.scss";
 import LoadingOverlay from "../components/LoadingOverlay";
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
-const Test = () => {
+const Segment = () => {
   createEffect(() => {
     ["dragenter", "dragover", "dragleave", "drop"].forEach((eventName) => {
       document
@@ -163,4 +163,4 @@ const Test = () => {
   );
 };
 
-export default Test;
+export default Segment;

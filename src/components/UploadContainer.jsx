@@ -1,4 +1,4 @@
-import styles from "../stylesheets/Test.module.scss";
+import styles from "../stylesheets/Segment.module.scss";
 import uploadIcon from "../assets/upload.svg";
 
 const UploadContainer = ({
@@ -17,7 +17,7 @@ const UploadContainer = ({
         onchange={(e) => handleFileChange(e)}
       />
       <div className={styles.uploadIcon}>
-        <a href="/Test">
+        <a href="/segment">
           <img src={uploadIcon} alt="UploadIcon" />
         </a>
       </div>
