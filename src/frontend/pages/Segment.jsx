@@ -98,7 +98,7 @@ const Segment = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "https:localhost:5000/process_image",
+        `http://${ process.env.AWS_PUBLIC_IP }/process_image`,
         {
           image: originalImage(),
           coordinates: coordinates(),
