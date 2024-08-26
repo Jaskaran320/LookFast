@@ -98,7 +98,7 @@ const Segment = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "https://7108-35-196-33-42.ngrok-free.app/process_image",
+        "https:localhost:5000/process_image",
         {
           image: originalImage(),
           coordinates: coordinates(),

@@ -17,7 +17,7 @@ const Intro = () => {
       </p>
       <p className={styles.check}>
         Check out our work{" "}
-        <a href="/Test" className={styles.highlight}>
+        <a href="/models" className={styles.highlight}>
           here
         </a>
         .

@@ -1,5 +1,7 @@
 import cv2
 import numpy as np
+import sys
+sys.path.insert(0,"segment-anything-2")
 from sam2.build_sam import build_sam2
 from sam2.utils.misc import variant_to_config_mapping
 from sam2.sam2_image_predictor import SAM2ImagePredictor
