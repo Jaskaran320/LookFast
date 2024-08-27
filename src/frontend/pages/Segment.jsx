@@ -23,7 +23,6 @@ const Segment = () => {
     });
   });
 
-  localStorage.clear();
 
   const [isUploading, setIsUploading] = createSignal(false);
   const [errorMessage, setErrorMessage] = createSignal("");
@@ -66,7 +65,6 @@ const Segment = () => {
         const reader = new FileReader();
         reader.onloadend = () => {
           const base64data = reader.result;
-          localStorage.setItem("uploadedImage", base64data);
           setImage(base64data);
           setOriginalImage(base64data);
           setTimeout(() => {
@@ -122,7 +120,6 @@ const Segment = () => {
   };
 
   const handleResetImage = () => {
-    localStorage.removeItem("uploadedImage");
     setImage(null);
     setCoordinates({ x: 0, y: 0 });
   }
