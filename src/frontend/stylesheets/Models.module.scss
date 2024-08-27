@@ -29,6 +29,7 @@
   transition: transform 0.2s ease-in-out;
   font-family: "Sora", sans-serif;
   cursor: pointer;
+  text-decoration: none;
 
   &:hover {
     transform: translateY(-5px);
