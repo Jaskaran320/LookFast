@@ -95,8 +95,9 @@ const Segment = () => {
 
     setLoading(true);
     try {
+      console.log(`https://${ import.meta.env.VITE_AWS_PUBLIC_IP }:${ import.meta.env.VITE_PORT_NUMBER }/process_image`);
       const response = await axios.post(
-        `https://${ import.meta.env.VITE_AWS_PUBLIC_IP }:${ import.meta.env.PORT_NUMBER }/process_image`,
+        `https://${ import.meta.env.VITE_AWS_PUBLIC_IP }:${ import.meta.env.VITE_PORT_NUMBER }/process_image`,
         {
           image: originalImage(),
           coordinates: coordinates(),
