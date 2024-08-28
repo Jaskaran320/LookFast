@@ -2,7 +2,7 @@ import { createSignal } from 'solid-js';
 import { For } from 'solid-js/web';
 import ModelCard from '../components/ModelCard';
 import styles from '../stylesheets/Models.module.scss';
-// import modelIcon from '../assets/model-icon.png';
+import modelIcon from '../assets/model.svg';
 
 const Models = () => {
   const [models] = createSignal([
@@ -10,7 +10,7 @@ const Models = () => {
       id: 1,
       name: 'Segmentation Model',
       description: 'Advanced model to segment images given an input point',
-    //   image: modelIcon,
+      image: modelIcon,
       usageURL: '/segment',
     },
   ]);

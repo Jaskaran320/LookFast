@@ -52,5 +52,13 @@ def process_image():
         return jsonify({"error": str(e)}), 500
 
 
+@app.route("/health", methods=["GET"])
+def health():
+    return jsonify({"message": "Healthy"}), 200
+
+@app.route("/")
+def test():
+    return jsonify({"message": "Test"}), 200
+
 if __name__ == "__main__":
     app.run()
