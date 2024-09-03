@@ -11,9 +11,8 @@ CORS(app)
 
 @app.route("/process_image", methods=["POST"])
 def process_image():
-    data = request.json
-    image_data = data.get("image")
-    coordinates = data.get("coordinates")
+    image_data = request.json.get("image")
+    coordinates = request.json.get("coordinates")
 
     if not image_data or not coordinates:
         return jsonify({"error": "Missing image data or coordinates"}), 400

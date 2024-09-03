@@ -9,13 +9,14 @@ from sam2.sam2_image_predictor import SAM2ImagePredictor
 
 def process_image_from_model(image, coordinates):
     try:
+        print("Coordinates: ", coordinates)
         input_point = np.array([[coordinates["x"], coordinates["y"]]])
         input_label = np.array([1])
         image_np = np.array(image.convert("RGB"), np.uint8)
 
         model = build_sam2(
             variant_to_config_mapping["tiny"],
-            "/content/sam2_hiera_tiny.pt",
+            "sam2_hiera_tiny.pt",
         )
 
         predictor = SAM2ImagePredictor(model)
