@@ -5,13 +5,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 1rem 3rem;
   background-color: App.$background;
   font-family: "Sora", sans-serif;
 }
 
 .logo {
-  font-size: 1.3rem;
+  font-size: 2rem;
   font-weight: bold;
   color: App.$accent;
   font-family: "Sora";
@@ -30,27 +30,33 @@
   display: flex;
   list-style: none;
   color: App.$accent;
-  margin: 0;
-  padding: 0;
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 1.3rem;
 
   li {
-    margin-left: 2rem;
-    margin-right: 2rem;
+    margin: 0 3rem;
+    transition: all 0.1s linear;
 
     a {
       text-decoration: none;
       color: App.$accent;
-      transition: color 0.3s ease;
+      transition: all 0.1s linear;
 
       &:hover {
-        color: App.$accent;
+        color: App.$primary;
       }
-
-      &.active {
+  
+      &:active {
         color: #3c2670;
       }
+    }
+
+    &:hover {
+      transform: translate(0, -1px);
+    }
+
+    &:active {
+      transform: translate(0, 0);
     }
   }
 }

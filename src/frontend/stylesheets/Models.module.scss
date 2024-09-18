@@ -1,16 +1,18 @@
 @use "App.module.scss";
 
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
+  width: 100%;
+  height: 100%;
+  background: App.$background;
+  padding: 1rem;
+  margin: 0;
 }
 
 .title {
-  text-align: center;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
-  font-size: 2.5rem;
+  text-align: left;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
   font-family: "Sora", sans-serif;
   color: App.$accent;
 }
@@ -18,21 +20,28 @@
 .catalogueGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-  gap: 2rem;
+  gap: 5rem;
+  padding: 1rem 0;
 }
 
 .modelCard {
-  background-color: App.$background;
+  background-color: App.$modelCard;
   border-radius: 8px;
   padding: 1.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
   font-family: "Sora", sans-serif;
   cursor: pointer;
   text-decoration: none;
 
   &:hover {
     transform: translateY(-5px);
+    background-color: #ff730086;
+    h2 {
+      color: black;
+    }
+    p {
+      color: black;
+    }
   }
 
   img {
@@ -56,9 +65,3 @@
   }
 }
 
-// .modelImage {
-//   width: 100%;
-//   height: 200px;
-//   object-fit: cover;
-//   border-radius: 8px;
-// }

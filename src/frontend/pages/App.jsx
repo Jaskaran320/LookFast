@@ -14,7 +14,7 @@ const App = () => {
       <div className={styles.main}>
         <Router>
           <Route end component={Home} />
-          <Route path="/models" component={Models} />
+          <Route path="/blogs" component={Models} />
           <Route path="/segment" component={Segment} />
           {/* <Route path="/about" component={About} /> */}
         </Router>

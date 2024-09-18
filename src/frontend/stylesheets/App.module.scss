@@ -1,19 +1,30 @@
 @import url("https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&family=Sora:wght@100..800&display=swap");
 
-$primary: #dc5a31;
+$primary: #ff7300;
 $accent: #453b6f;
-$background: #feffff;
+$background: #ffefef;
 $button: #21068f14;
 $upload: #4e55af;
+$modelCard: #453b6f3f;
 
 .container {
   width: 100%;
+  height: 100vh;
+  background: $background;
+}
+
+.home {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  gap: 2rem;
 }
 
 .main {
   text-align: center;
   padding: 2vh 2vw;
-  margin-top: 2vh;
 }
 
 .title {

@@ -5,24 +5,24 @@ import mailIcon from "../assets/mail.svg";
 
 const Intro = () => {
   return (
-    <>
+    <div>
       <h1 className={styles.title}>Hi There!</h1>
       <h2 className={styles.subtitle}>
         Welcome to <span className={styles.mid_link}>LookFast</span>
       </h2>
       <p className={styles.description}>
-        A growing platform showcasing
+        Breaking down latest Computer Vision research into easy-to-understand 
         <br />
-        Computer Vision applications
+        summaries, and occasionally showcasing innovative models.
       </p>
       <p className={styles.check}>
-        Check out our work{" "}
+        Explore our summaries and models{" "}
         <a href="/models" className={styles.highlight}>
           here
         </a>
         .
       </p>
-    </>
+    </div>
   );
 };
 
@@ -51,10 +51,10 @@ const Contribute = () => {
 
 const Home = () => {
   return (
-    <>
+    <div className={styles.home}>
       <Intro />
       <Contribute />
-    </>
+    </div>
   );
 };
 
