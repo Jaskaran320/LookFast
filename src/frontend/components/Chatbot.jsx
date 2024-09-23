@@ -1,6 +1,6 @@
-import { createSignal, on, onCleanup, onMount } from "solid-js";
+import { createSignal, onCleanup, onMount, createEffect } from "solid-js";
 import { HumanMessage, AIMessage } from "@langchain/core/messages";
-import {Motion} from "solid-motionone"
+import { Motion } from "solid-motionone";
 import TextBubble from "./TextBubble";
 import { performRAG } from "../utils/rag";
 import arrow from "../assets/arrow.svg";
@@ -8,21 +8,22 @@ import square from "../assets/square.svg";
 import styles from "../stylesheets/Rag.module.scss";
 
 const Chatbot = ({ db }) => {
-  const TYPING_SPEED = 10;
+  const TYPING_SPEED = 15;
   const [queryText, setQueryText] = createSignal("");
   const [isTyping, setIsTyping] = createSignal(true);
   const [chatHistory, setChatHistory] = createSignal([]);
+  const [abortControllerRef, setAbortControllerRef] = createSignal(null);
   let chatContainerRef;
   let inputRef;
 
-  const initialGreetings = "Hi there! Please ask me any questions about the uploaded content and I will try my best to help you out. 😊";
-  
+  const initialGreeting = "Hi there! Please ask me any questions about the uploaded content and I will try my best to help you out. 😊";
+
   const simulateTypingEffect = (reply, isInitialGreeting = false) => {
     let index = 0;
     let currentText = "";
 
     const typeCharacter = () => {
-      if (index < reply.length) {
+      if (index < reply.length && !abortControllerRef()?.signal.aborted) {
         currentText += reply.charAt(index);
 
         setChatHistory((prevHistory) => {
@@ -50,6 +51,7 @@ const Chatbot = ({ db }) => {
       } else {
         setIsTyping(false);
         scrollToBottom();
+        setAbortControllerRef(null);
       }
     };
 
@@ -61,6 +63,7 @@ const Chatbot = ({ db }) => {
     }
     
     setIsTyping(true);
+    setAbortControllerRef(new AbortController());
     setTimeout(() => {
       typeCharacter();
       scrollToBottom();
@@ -68,32 +71,35 @@ const Chatbot = ({ db }) => {
   };
 
   const scrollToBottom = () => {
-    if (chatContainerRef.current) {
-      const scrollHeight = chatContainerRef.current.scrollHeight;
-      const height = chatContainerRef.current.clientHeight;
+    if (chatContainerRef) {
+      const scrollHeight = chatContainerRef.scrollHeight;
+      const height = chatContainerRef.clientHeight;
       const maxScrollTop = scrollHeight - height;
-      chatContainerRef.current.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
+      chatContainerRef.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
     }
   };
 
   onMount(() => {
-    simulateTypingEffect(initialGreetings, true);
+    simulateTypingEffect(initialGreeting, true);
   });
 
-  onMount(() => {
+  createEffect(() => {
+    chatHistory();
     scrollToBottom();
-  }, [chatHistory()]);
+  });
 
-  const handleClick = async (queryText) => {
-    if (!queryText.trim() || isTyping()) return;
+  const handleClick = async () => {
+    const currentQueryText = queryText();
+    if (!currentQueryText.trim() || isTyping()) return;
 
     let newChatHistory = [
       ...chatHistory(),
-      { type: "user", markdown: queryText },
+      { type: "user", markdown: currentQueryText },
     ];
     setChatHistory(newChatHistory);
     scrollToBottom();
     setQueryText("");
+    setIsTyping(true);
 
     try {
       const formattedChatHistory = newChatHistory
@@ -104,7 +110,7 @@ const Chatbot = ({ db }) => {
             : new AIMessage(msg.markdown)
         );
 
-      const response = await performRAG(queryText, formattedChatHistory, db);
+      const response = await performRAG(currentQueryText, formattedChatHistory, db);
       let finalResponse =
         response === "Unknown"
           ? "I'm sorry, I don't know the answer to that question."
@@ -112,13 +118,28 @@ const Chatbot = ({ db }) => {
 
       simulateTypingEffect(finalResponse);
     } catch (error) {
-      simulateTypingEffect(
-        "I'm sorry, I encountered an error while processing your request."
-      );
+      if (error.name === 'AbortError') {
+        setChatHistory((prevHistory) => [
+          ...prevHistory,
+          { type: "bot", markdown: "Response generation was stopped." },
+        ]);
+        setIsTyping(false);
+      } else {
+        simulateTypingEffect(
+          "I'm sorry, I encountered an error while processing your request."
+        );
+      }
     }
   };
 
-  onMount(() => {
+  const handleStopGeneration = () => {
+    const currentAbortController = abortControllerRef();
+    if (currentAbortController) {
+      currentAbortController.abort();
+    }
+  };
+
+  createEffect(() => {
     if (chatContainerRef) {
       chatContainerRef.classList.add(styles.smoothScroll);
     }
@@ -149,32 +170,28 @@ const Chatbot = ({ db }) => {
         >
           {chatHistory().map((textitem, index) =>
             textitem.type === "user" ? (
-              <Motion.div
+              <Motion
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1, duration: 0.3 }}
                 className={styles.motionUserText}
               >
                 <TextBubble markdown={textitem.markdown} type="user" />
-              </Motion.div>
+              </Motion>
             ) : index === chatHistory().length - 1 ? (
-              <Motion.div
+              <Motion
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1, duration: 0.3 }}
                 className={styles.motionBotText}
               >
                 <TextBubble markdown={textitem.markdown} type="bot" />
-              </Motion.div>
+              </Motion>
             ) : (
               <div className={styles.motionBotText}>
                 <TextBubble markdown={textitem.markdown} type="bot" />
               </div>
             )
-            // <div key={index} 
-            //   className={textitem.type === "user" ? styles.userText : styles.botText}>
-            //   <TextBubble markdown={textitem.markdown} type={textitem.type} />
-            // </div>
           )}
         </div>
         <div className={styles.inputContainer}>
@@ -186,20 +203,22 @@ const Chatbot = ({ db }) => {
                 isTyping() ? "Gemini is typing..." : "Enter Prompt Here..."
               }
               value={queryText()}
-              onInput={(e) => {
-                setQueryText(e.target.value);
-              }}
+              onInput={(e) => setQueryText(e.target.value)}
               onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  handleClick(queryText());
+                if (e.key === "Enter" && !isTyping()) {
+                  handleClick();
                 }
               }}
             />
-            <button type="button" onClick={handleClick} className={styles.submitButton}>
+            <button 
+              type="button" 
+              onClick={isTyping() ? handleStopGeneration : handleClick} 
+              className={styles.submitButton}
+            >
               <img
-                src={arrow}
-                alt="arrow"
-                className={styles.arrowIcon}
+                src={isTyping() ? square : arrow}
+                alt={isTyping() ? "Stop" : "Send"}
+                className={isTyping() ? styles.stopIcon : styles.arrowIcon}
               />
             </button>
           </div>
