@@ -1,6 +1,5 @@
 import axios from "axios";
-import { createEffect } from "solid-js";
-import { createSignal, Show } from "solid-js";
+import { createSignal, createEffect, Show } from "solid-js";
 import imageCompression from "browser-image-compression";
 
 import UploadContainer from "../components/UploadContainer";
@@ -39,7 +38,6 @@ const Segment = () => {
     let dataTransfer = e.dataTransfer;
     let image = dataTransfer.files;
     document.getElementById("fileUpload").files = image;
-    console.log(document.getElementById("fileUpload").files);
     document.getElementById("fileUpload").dispatchEvent(new Event("change"));
   };
 
@@ -96,7 +94,8 @@ const Segment = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        `https://${ import.meta.env.VITE_AWS_PUBLIC_IP }/process_image`,
+        // `https://${ import.meta.env.VITE_AWS_PUBLIC_IP }/process_image`,
+        'https://3.108.217.182/process_image',
         {
           image: originalImage(),
           coordinates: coordinates(),
@@ -154,6 +153,7 @@ const Segment = () => {
           handleFileChange={handleFileChange}
           handleDrop={handleDrop}
           errorMessage={errorMessage}
+          context="segment"
         />
       </Show>
     </div>

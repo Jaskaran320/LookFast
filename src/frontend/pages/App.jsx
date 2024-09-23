@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import Home from "./Home";
 import Segment from "./Segment";
 import Models from "./Models";
+import Rag from "./Rag";
 // import About from "./About";
 
 const App = () => {
@@ -14,8 +15,10 @@ const App = () => {
       <div className={styles.main}>
         <Router>
           <Route end component={Home} />
+          <Route path="/models" component={Models} />
           <Route path="/blogs" component={Models} />
           <Route path="/segment" component={Segment} />
+          <Route path="/rag" component={Rag} />
           {/* <Route path="/about" component={About} /> */}
         </Router>
       </div>

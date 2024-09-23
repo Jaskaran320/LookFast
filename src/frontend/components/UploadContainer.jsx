@@ -6,27 +6,32 @@ const UploadContainer = ({
   handleDrop,
   handleFileChange,
   errorMessage,
+  context,
 }) => (
   <div className={styles.uploadContainer} ondrop={handleDrop}>
     <div className={styles.uploadArea} onClick={handleFileUpload}>
       <input
         id="fileUpload"
         type="file"
-        accept=".jpg,.jpeg,.png"
+        accept={context === "segment" ? ".jpg,.jpeg,.png" : ".txt,.json,.md"}
         style={{ display: "none" }}
         onchange={(e) => handleFileChange(e)}
       />
       <div className={styles.uploadIcon}>
-        <a href="/segment">
+        <a href={context === "segment" ? "/segment" : "/rag"}>
           <img src={uploadIcon} alt="UploadIcon" />
         </a>
       </div>
       <p className={styles.uploadText}>
-        Drop your image here, or{" "}
+        {context === "segment"
+          ? "Drop your image here, or "
+          : "Drop your file here, or "}
         <span className={styles.browseText}>browse</span>
       </p>
       <p className={styles.supportedFormats}>
-        Supports JPG, JPEG and PNG files.
+        {context === "segment"
+          ? "Supports JPG, JPEG and PNG files."
+          : "Supports TXT, JSON, and MD files."}
       </p>
       {errorMessage() && <p className={styles.errorText}>{errorMessage()}</p>}
     </div>

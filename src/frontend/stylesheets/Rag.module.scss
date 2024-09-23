@@ -1,0 +1,297 @@
+@use "App.module.scss";
+
+.fileUploadContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  background-color: App.$background;
+  border: 1px solid App.$accent;
+  border-radius: 0.5rem;
+}
+
+input[type="file"] {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border: 1px solid App.$accent;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.fileContent {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  background-color: App.$background;
+  padding: 1rem;
+  border: 1px solid App.$accent;
+  border-radius: 0.25rem;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.chatbotContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  background-color: App.$background;
+  border: 1px solid App.$accent;
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+}
+
+.queryInput {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid App.$accent;
+  border-radius: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.submitButton {
+  padding: 0.5rem 1rem;
+  background-color: App.$primary;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.responseContainer {
+  width: 100%;
+  padding: 1rem;
+  background-color: App.$background;
+  border: 1px solid App.$accent;
+  border-radius: 0.25rem;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.ragContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background-color: App.$background;
+}
+
+.title {
+  font-size: 2rem;
+  color: App.$accent;
+  margin-bottom: 1rem;
+}
+
+.chatIsland {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chat {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin: 1.5rem 0;
+}
+
+.chatContainer {
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  background-color: rgba(173, 216, 230, 0.05);
+  height: 60vh;
+  width: 90vw;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  padding: 0.5rem 1rem;
+  overflow: auto;
+  border-radius: 0.5rem;
+  @media (min-width: 768px) {
+    height: 63vh;
+    width: 60vw;
+  }
+}
+
+.chatbotButton {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: App.$accent;
+  color: App.$background;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  &:hover {
+    background-color: App.$primary;
+  }
+}
+
+.userText {
+  align-self: flex-end;
+  margin: 0.5rem 0;
+  max-width: 36rem;
+}
+
+.botText {
+  align-self: flex-start;
+  margin: 0.5rem 0;
+  max-width: 36rem;
+}
+
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.75rem;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  width: 80%;
+  height: 2.5rem;
+  padding: 0.5rem;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-radius: 1.25rem;
+  background-color: transparent;
+  cursor: pointer;
+  &:focus-within {
+    outline: none;
+  }
+}
+
+.input {
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  &:focus {
+    outline: none;
+  }
+}
+
+.submitButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.stopIcon {
+  height: 1.5rem;
+  width: 1.5rem;
+  // border-radius: 50%;
+  // transition: transform 0.2s;
+
+  border-radius: 9999px;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+  transition-duration: 200ms;
+}
+
+.arrowIcon {
+  @extend .stopIcon;
+  &:hover {
+    transform: rotate(-90deg);
+  }
+}
+
+.note {
+  text-align: center;
+  font-size: 0.75rem;
+  color: App.$primary;
+  opacity: 0.75;
+  width: 75%;
+  margin-top: 1rem;
+}
+
+.smoothScroll {
+  scroll-behavior: smooth;
+}
+
+.markdown-common {
+  padding: 0.5rem;
+  border-radius: 0.75rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 200;
+  letter-spacing: -0.025em;
+  white-space: pre-line;
+  --bg-opacity: 0.4;
+
+  @media (min-width: 768px) {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    font-weight: 400;
+  }
+}
+
+.motion-common {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.userText {
+  // background-color: rgba(89, 216, 144, 0.908);
+  color: #5ac280;
+  background-color: #d6e5e3;
+  .markdown {
+    // white-space: pre-line;
+    // text-align: right;
+    // font-family: "Sora", sans-serif;
+    // font-weight: 200;
+    // font-size: 0.75rem;
+    // align-self: flex-end;
+    // text-align: right;
+    // // background-color: rgba(81, 231, 146, 0.844);
+    // // color: rgba(66, 72, 116, 0.8);
+    // border-radius: 0.75rem;
+    // padding: 0.5rem;
+    // line-height: 1.25;
+    // letter-spacing: -0.015em;
+
+    @extend .markdown-common;
+    text-align: right;
+  }
+}
+
+.botText {
+  // background-color: rgba(111, 126, 225, 0.777);
+  color: #424874;
+  background-color: #dce0e4;
+  .markdown {
+    // white-space: pre-line;
+    // text-align: left;
+    // font-family: "Sora", sans-serif;
+    // font-weight: 200;
+    // font-size: 0.75rem;
+    // align-self: flex-start;
+    // text-align: left;
+    // // background-color: rgba(91, 109, 225, 0.777);
+    // // color: rgba(66, 72, 116, 0.8);
+    // border-radius: 0.75rem;
+    // padding: 0.5rem;
+    // line-height: 1.25;
+    // letter-spacing: -0.015em;
+
+    @extend .markdown-common;
+    text-align: left;
+  }
+}
+
+.motionUserText {
+  @extend .motion-common;
+  align-self: flex-end;
+}
+
+.motionBotText {
+  @extend .motion-common;
+  align-self: flex-start;
+}
